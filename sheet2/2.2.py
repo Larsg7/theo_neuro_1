@@ -19,7 +19,7 @@ def gen_child_train(parent_train, p, jitter_spread=0, jitter_center=0.0):
 max_time = 1
 time_step = 0.01
 rate = 60
-p = 0.1
+p = 0.7
 time = np.arange(-max_time, max_time, time_step)
 
 parent_train = TrainGenerator.homogeneous(time, rate, time_step)
@@ -28,16 +28,23 @@ child_train = gen_child_train(parent_train, p)
 # rate_child = p * rate_parent
 print("Rate of child with p={}, r_0={}: {:0.1f}".format(p, rate, sum(child_train) / max_time / 2))
 
-plt.plot(time, parent_train)
-plt.plot(time, child_train)
-plt.show()
+#plt.plot(time, parent_train)
+#plt.plot(time, child_train)
+
+# plt.vlines(time, 0, parent_train)
+# plt.vlines(time, 0, child_train, colors='r')
+#
+plt.xlabel("time [s]")
+# plt.ylabel("Spikes")
+# plt.show()
 
 ##### b) #####
 
-child_train = gen_child_train(parent_train, p, 0)
-
-plt.plot(time, signal.correlate(parent_train, child_train, "same"))
-plt.show()
+# child_train = gen_child_train(parent_train, p, 2, 0)
+#
+# plt.ylabel("Cross correlation")
+# plt.plot(time, signal.correlate(parent_train, child_train, "same"))
+# plt.show()
 
 ##### c) #####
 

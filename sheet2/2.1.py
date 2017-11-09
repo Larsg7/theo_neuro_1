@@ -18,10 +18,12 @@ train2 = TrainGenerator.inhomogeneous(time, rate2, time_step)
 
 correlation = signal.correlate(train1, train2, "same")
 
-plt.plot(time, correlation)
+# plt.plot(time, correlation)
 # Does the same thing, only slower...
 # plt.plot(time, cross_correlation(time, train1, train2, time_step))
-#plt.show()
+plt.ylabel("Cross correlation")
+plt.xlabel("time [s]")
+# plt.show()
 
 # when omega >> r_0 the frequency of the correlation function increases until its just 0
 
