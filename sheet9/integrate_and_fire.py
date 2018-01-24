@@ -2,7 +2,7 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 
-dt = 0.5
+dt = 1
 t_max = 500
 synaptic_events = [50, 150, 190, 300, 320, 400, 410]
 
@@ -18,7 +18,7 @@ class Neuron:
         self.p_max = 0.5
         self.tau_s = 10
         self.e = math.exp(1)
-        self.t_m_i_e = 0
+        self.r_m_i_e = 0
 
         self.v = -80
         self.z = 0
@@ -30,7 +30,7 @@ class Neuron:
         self.on_spike: callable = None
 
     def __calculate_dv(self):
-        return (self.e_L - self.v - self.r_m_g_s * self.p_s * (self.v - self.e_s)) / self.tau_m * dt + self.r_m_g_s
+        return (self.e_L - self.v - self.r_m_g_s * self.p_s * (self.v - self.e_s)) / self.tau_m * dt + self.r_m_i_e
 
     def __calculate_dz(self):
         return -self.z / self.tau_s * dt
@@ -56,8 +56,8 @@ class Neuron:
 ##### Exercise 1 #####
 
 
-neuron = Neuron()
-t = 0
+# neuron = Neuron()
+# t = 0
 
 # while t <= t_max:
 #     if t in synaptic_events:
@@ -73,7 +73,7 @@ t = 0
 
 ##### Exercise 2 #####
 
-t_max = 1
+t_max = 200
 dt = 0.1
 
 neuron0 = Neuron()
@@ -82,7 +82,7 @@ neuron1 = Neuron()
 neuron0.r_m_g_s = neuron1.r_m_g_s = 0.15
 neuron0.tau_m = neuron1.tau_m = 20
 neuron0.r_m_g_s = neuron1.r_m_g_s = 18
-neuron0.e_s = neuron1.e_s = -80
+neuron0.e_s = neuron1.e_s = -0
 neuron0.on_spike = neuron1.register_spike
 neuron1.on_spike = neuron0.register_spike
 
